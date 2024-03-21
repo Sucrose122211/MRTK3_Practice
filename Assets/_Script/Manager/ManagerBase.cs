@@ -1,6 +1,13 @@
 
 public abstract class ManagerBase
 {
+    protected ManagerBase()
+    {
+        var GI = GameInstance.I;
+        if(GI == null) return;
+
+        GI.AddManager(this);
+    }
     public virtual void OnAwake() {}
 
     public virtual void OnDestroy() {}

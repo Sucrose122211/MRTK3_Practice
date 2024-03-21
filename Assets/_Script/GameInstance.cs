@@ -38,9 +38,6 @@ public class GameInstance : BehaviourSingleton<GameInstance>
         m_GazeManager = new GazeManager();
         m_FeedManager = new FeedManager();
 
-        managers.Add(m_GazeManager);
-        managers.Add(m_FeedManager);
-
         AwakeMangers();
     }
 
@@ -76,5 +73,21 @@ public class GameInstance : BehaviourSingleton<GameInstance>
     public void CoroutineHelp(IEnumerator coroutine)
     {
         StartCoroutine(coroutine);
+    }
+
+    public void AddManager(ManagerBase manager)
+    {
+        managers ??= new();
+
+        if(managers.Contains(manager)) return;
+
+        managers.Add(manager);
+    }
+
+    public void RemoveManager(ManagerBase manager)
+    {
+        if(managers == null || !managers.Contains(manager)) return;
+        
+        managers.Remove(manager);
     }
 }
