@@ -15,6 +15,7 @@ public class GazeManager: ManagerBase
     public Vector3 GazeVector
     {
         get {
+            if(_gazeInteractor == null) return Vector3.zero;
             return _gazeInteractor.transform.forward;
         }
     }
@@ -22,6 +23,7 @@ public class GazeManager: ManagerBase
     public Vector3 GazeOrigin
     {
         get {
+            if(_gazeInteractor == null) return Vector3.zero;
             return _gazeInteractor.transform.position;
         }
     }
@@ -30,6 +32,8 @@ public class GazeManager: ManagerBase
     {
         base.OnAwake();
         var go = GameObject.Find("MRTK Gaze Controller");
+
+        if(go == null) return;
 
         _gazeInteractor = go.GetComponentInChildren<FuzzyGazeInteractor>();
 

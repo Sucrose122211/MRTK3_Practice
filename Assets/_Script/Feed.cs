@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using data;
 
 public class Feed : SelfDestructive
 {
@@ -55,5 +56,11 @@ public class Feed : SelfDestructive
         var manager = GI.GazeManager;
         Debug.Log($"Gaze Origin: {manager.GazeOrigin}, \nGaze Direction: {manager.GazeVector} \nObject Position: {this.transform.position}, \nObject Speed: {_moveSpeed}");
         GI.Score = GI.Score + 1;
+        GazeData data = new GazeData();
+        data.Add("Gaze Origin", manager.GazeOrigin.ToString());
+        data.Add("Gaze Direction", manager.GazeVector.ToString());
+        data.Add("Object Position", transform.position.ToString());
+        data.Add("Object Speed", _moveSpeed.ToString());
+        GI.DataManager.SendDataToServer(data);
     }
 }

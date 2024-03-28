@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,6 +13,10 @@ public class GameInstance : BehaviourSingleton<GameInstance>
     private GazeManager m_GazeManager;
 
     public GazeManager GazeManager => m_GazeManager;
+
+    private DataManager m_DataManager;
+
+    public DataManager DataManager => m_DataManager;
 
     // private UIManager m_UIManager;
     // public UIManager UIManager => m_UIManager;
@@ -37,8 +42,12 @@ public class GameInstance : BehaviourSingleton<GameInstance>
 
         m_GazeManager = new GazeManager();
         m_FeedManager = new FeedManager();
+        
+        var obj = FindObjectsOfType<DataManager>();
+        if(obj.Length > 0) m_DataManager = obj[0];
 
         AwakeMangers();
+        StartCoroutine(nameof(LoadingCoroutine));
     }
 
     void Start() {
@@ -46,6 +55,7 @@ public class GameInstance : BehaviourSingleton<GameInstance>
         {
             manager.OnStart();
         }
+        NetworkManager.Singleton.StartClient();
     }
 
     void Update() {
@@ -61,6 +71,11 @@ public class GameInstance : BehaviourSingleton<GameInstance>
         {
             manager.OnAwake();
         }
+    }
+
+    IEnumerator LoadingCoroutine()
+    {
+        yield break;
     }
 
     private void OnDrawGizmos() {
