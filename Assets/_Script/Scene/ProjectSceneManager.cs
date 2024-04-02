@@ -1,7 +1,9 @@
 using System;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Unity.Netcode.NetworkSceneManager;
 
 public class ProjectSceneManager : NetworkBehaviour
 {
@@ -18,6 +20,8 @@ public class ProjectSceneManager : NetworkBehaviour
         }
     }
 #endif
+    public event SceneEventDelegate External_OnSceneEvent;
+
     [SerializeField]
     private string m_SceneName;
     private Scene m_LoadedScene;
@@ -36,19 +40,29 @@ public class ProjectSceneManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if (IsServer && !string.IsNullOrEmpty(m_SceneName))
-        {
-            NetworkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
-            var status = NetworkManager.SceneManager.LoadScene(m_SceneName, LoadSceneMode.Single);
-            CheckStatus(status);
-        }
+        // if (IsServer && !string.IsNullOrEmpty(m_SceneName))
+        // {
+        //     NetworkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
+        //     NetworkManager.SceneManager.OnSceneEvent += External_OnSceneEvent;
+        //     var status = NetworkManager.SceneManager.LoadScene(m_SceneName, LoadSceneMode.Single);
+        //     CheckStatus(status);
+        // }
 
         base.OnNetworkSpawn();
     }
 
-    public void SetSceneName(string sceneName) => m_SceneName = sceneName;
+    public void LoadScene(string sceneName)
+    {
+        if (IsServer && !string.IsNullOrEmpty(sceneName))
+        {
+            NetworkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
+            NetworkManager.SceneManager.OnSceneEvent += External_OnSceneEvent;
+            var status = NetworkManager.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+            CheckStatus(status);
+        }
+    }
 
-    // public void AddOnSceneEvent(Func<SceneEvent> onSceneEvent) => NetworkManager.SceneManager.OnSceneEvent += onSceneEvent; 
+    public void SetSceneName(string sceneName) => m_SceneName = sceneName;
 
     private void CheckStatus(SceneEventProgressStatus status, bool isLoading = true)
     {

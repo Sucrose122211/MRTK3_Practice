@@ -1,21 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json;
-using Unity.Netcode;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.Android;
 using data;
-using System;
 
-public partial class DataManager : NetworkBehaviour
+public partial class DataManager : ManagerBase
 {
     Dictionary<string, List<ManagableData>> DataDict;
     
     readonly char[] parsingDelimeter = {' ', '\n', ':'};
 
     // Start is called before the first frame update
-    void Start()
+    public override void OnStart()
     {
         DataDict = new();
     }

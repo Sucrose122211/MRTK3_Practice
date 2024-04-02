@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/_Scenes/Init.unity
     guid: ac67ae2c04dc85e4a90f5f126c3299de
   - enabled: 1
-    path: Assets/_Scenes/Server.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/_Scenes/PickMan.unity
     guid: da1b4f718f6d4c34da8901b21ff4011f
+  - enabled: 0
+    path: Assets/_Scenes/Server.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 017b9c8e9fd71a54a920b743c553df31, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: bb1eebfd7fef8df479e0aed485c2cb45, type: 2}

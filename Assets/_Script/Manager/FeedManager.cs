@@ -6,29 +6,38 @@ public class FeedManager : ManagerBase
 {
     private GameInstance GI;
     private FeedFactory _factory;
+    private bool isActive = true;
     private bool isTiming = true;
     private const float delay = 5;
 
     public override void OnAwake()
     {
         base.OnAwake();
-        _factory = new FeedFactory(GameInstance.I.Plane);
         GI = GameInstance.I;
+        if(GI.UserType == EUSERTYPE.RECIEVER) isActive = false;
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
 
-        if(!isTiming) return;
+        if(!isActive || !isTiming) return;
         GI.CoroutineHelp(GenerateCoroutine());
     }
 
     IEnumerator GenerateCoroutine()
     {
+        if(_factory == null) yield break;
+
         _factory.GenerateRandom();
         isTiming = false;
         yield return new WaitForSeconds(delay);
         isTiming = true;
     }
+
+    public void GetFeedFactory(GameObject plane)
+    {
+        _factory ??= new FeedFactory(plane);
+    }
+
 }

@@ -1,3 +1,4 @@
+using System;
 using MixedReality.Toolkit.Input;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -44,5 +45,10 @@ public class GazeManager: ManagerBase
     {
         base.OnUpdate();
         if(_gazeInteractor == null) return;
+    }
+
+    public void GetGazeInteractor()
+    {
+        _gazeInteractor = _gazeInteractor != null ? _gazeInteractor : GameObject.FindAnyObjectByType<FuzzyGazeInteractor>();
     }
 }

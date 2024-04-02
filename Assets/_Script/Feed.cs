@@ -37,6 +37,7 @@ public class Feed : SelfDestructive
     {
         if(other.gameObject.CompareTag("Player"))
         {
+            SendData();
             Destroy(gameObject);
         }
     }
@@ -52,6 +53,11 @@ public class Feed : SelfDestructive
     // TOOD: Event Delegate 형식으로 변경
     // TODO: DataManager 제작(Save data)
     private void OnDestroy() {
+
+    }
+
+    private void SendData()
+    {
         var GI = GameInstance.I;
         var manager = GI.GazeManager;
         Debug.Log($"Gaze Origin: {manager.GazeOrigin}, \nGaze Direction: {manager.GazeVector} \nObject Position: {this.transform.position}, \nObject Speed: {_moveSpeed}");

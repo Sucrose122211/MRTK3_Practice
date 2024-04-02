@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using MixedReality.Toolkit.Input;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameInstance : BehaviourSingleton<GameInstance>
+public partial class GameInstance : NetworkBehaviour
 {
     private FeedManager m_FeedManager;
 
@@ -18,14 +19,15 @@ public class GameInstance : BehaviourSingleton<GameInstance>
 
     public DataManager DataManager => m_DataManager;
 
+    private ProjectSceneManager m_SceneManager;
+    public ProjectSceneManager SceneManager => m_SceneManager;
+
     // private UIManager m_UIManager;
     // public UIManager UIManager => m_UIManager;
 
-
-    [SerializeField] GameObject m_plane;
-
-    public GameObject Plane => m_plane;
     private int _score;
+
+    public EUSERTYPE UserType;
 
     public int Score{
         get{ return _score; }
@@ -42,9 +44,9 @@ public class GameInstance : BehaviourSingleton<GameInstance>
 
         m_GazeManager = new GazeManager();
         m_FeedManager = new FeedManager();
-        
-        var obj = FindObjectsOfType<DataManager>();
-        if(obj.Length > 0) m_DataManager = obj[0];
+        m_DataManager = new DataManager();
+
+        m_SceneManager = GetComponent<ProjectSceneManager>();
 
         AwakeMangers();
         StartCoroutine(nameof(LoadingCoroutine));
@@ -55,7 +57,6 @@ public class GameInstance : BehaviourSingleton<GameInstance>
         {
             manager.OnStart();
         }
-        NetworkManager.Singleton.StartClient();
     }
 
     void Update() {
@@ -105,4 +106,28 @@ public class GameInstance : BehaviourSingleton<GameInstance>
         
         managers.Remove(manager);
     }
+
+    #region Singleton
+    private static GameInstance i = null;
+
+    public static GameInstance I
+    {
+        get
+        {
+            if (i == null)
+            {
+                i = FindObjectOfType(typeof(GameInstance)) as GameInstance;
+                if (i == null)
+                {
+
+                }
+            }
+            return i;
+        }
+        set
+        {
+            i = value;
+        }
+    }
+    #endregion
 }
