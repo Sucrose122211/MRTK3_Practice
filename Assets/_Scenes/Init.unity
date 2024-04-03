@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed2b1473e9082448aa4077e1ac493e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userType: 1
+  userType: 0
   m_instancePrefab: {fileID: 1101495286730028195, guid: 808094e24bbab8c4ea996683ee6eab01, type: 3}
   m_sceneManager: {fileID: 1427286833}
 --- !u!114 &1854413042

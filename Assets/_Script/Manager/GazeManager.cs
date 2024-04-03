@@ -17,7 +17,7 @@ public class GazeManager: ManagerBase
     {
         get {
             if(_gazeInteractor == null) return Vector3.zero;
-            return _gazeInteractor.transform.forward;
+            return _gazeInteractor.rayOriginTransform.forward;
         }
     }
 
@@ -25,7 +25,7 @@ public class GazeManager: ManagerBase
     {
         get {
             if(_gazeInteractor == null) return Vector3.zero;
-            return _gazeInteractor.transform.position;
+            return _gazeInteractor.rayOriginTransform.position;
         }
     }
 

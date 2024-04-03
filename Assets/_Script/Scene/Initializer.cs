@@ -12,11 +12,13 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
 {
     public class Initializer : NetworkBehaviour
     {
-        // #if UNITY_EDITOR || !DEBUG
+        #if UNITY_EDITOR
         [SerializeField] EUSERTYPE userType;
-        // #else
-        // EUSERTYPE userType = EUSERTYPE.RECIEVER;
-        // #endif
+        #elif STANDALONE_WIN
+        EUSERTYPE userType = EUSERTYPE.RECIEVER;
+        #else
+        EUSERTYPE userType = EUSERTYPE.SENDER;
+        #endif
         string m_SceneName;
 
         const string RecieverSceneName = "Server";
