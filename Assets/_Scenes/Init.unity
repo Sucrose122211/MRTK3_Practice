@@ -134,6 +134,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8060869785979350937, guid: 7f6de1b841e56f6448dd44fb0fb0a710, type: 3}
+      propertyPath: ConnectionData.Address
+      value: 143.248.232.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060869785979350937, guid: 7f6de1b841e56f6448dd44fb0fb0a710, type: 3}
+      propertyPath: ConnectionData.ServerListenAddress
+      value: 0.0.0.0
+      objectReference: {fileID: 0}
     - target: {fileID: 8060869785979350938, guid: 7f6de1b841e56f6448dd44fb0fb0a710, type: 3}
       propertyPath: NetworkConfig.Prefabs.NetworkPrefabsLists.Array.data[0]
       value: 
@@ -532,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed2b1473e9082448aa4077e1ac493e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userType: 0
+  userType: 1
   m_instancePrefab: {fileID: 1101495286730028195, guid: 808094e24bbab8c4ea996683ee6eab01, type: 3}
   m_sceneManager: {fileID: 1427286833}
 --- !u!114 &1854413042

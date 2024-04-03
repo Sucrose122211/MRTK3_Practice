@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using data;
 using System;
+using Microsoft.MixedReality.Toolkit.MultiUse;
 
 public partial class DataManager: ManagerBase
 {

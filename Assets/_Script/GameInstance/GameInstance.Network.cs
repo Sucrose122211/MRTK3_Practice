@@ -5,18 +5,21 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public partial class GameInstance: NetworkBehaviour
+namespace Microsoft.MixedReality.Toolkit.MultiUse
 {
-    [Rpc(SendTo.Server, RequireOwnership = false)]
-    private void RecieveDataServerRPC(string packet)
+    public partial class GameInstance: NetworkBehaviour
     {
-        Debug.Log("recieved");
-        m_DataManager.FetchData(packet);
-    }
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void RecieveDataServerRPC(string packet)
+        {
+            Debug.Log("recieved");
+            m_DataManager.FetchData(packet);
+        }
 
-    public void SendDataRPC(string packet)
-    {
-        RecieveDataServerRPC(packet);
-    }
+        public void SendDataRPC(string packet)
+        {
+            RecieveDataServerRPC(packet);
+        }
 
+    }
 }

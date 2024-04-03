@@ -1,4 +1,6 @@
 
+using Microsoft.MixedReality.Toolkit.MultiUse;
+
 public abstract class ManagerBase
 {
     protected ManagerBase()

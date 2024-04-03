@@ -5,7 +5,7 @@ namespace data
     {
         public GazeData()
         {
-            this.name = nameof(GazeData);
+            this.name = typeof(GazeData).FullName;
         }
     }
 }
