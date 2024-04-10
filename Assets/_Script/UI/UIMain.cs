@@ -14,7 +14,7 @@ public class UIMain : UIBase
     void Awake()
     {
         TxtGazeMode.text = "";
-        // TxtHeadSpeed.text = "";
+        TxtHeadSpeed.text = "";
     }
 
     void Start()
@@ -28,7 +28,7 @@ public class UIMain : UIBase
         GameInstance GI = GameInstance.I;
         if(GI == null) return;
         TxtGazeMode.text = "GazeMode: " + GI.GazeManager.GazeMode.ToString();
-        // TxtHeadSpeed.text = "HeadSpeed: " + GameInstance.I.GazeManager.MovedAngle.ToString();
+        TxtHeadSpeed.text = "HeadSpeed: " + GameInstance.I.GazeManager.MovedAngle.ToString();
         var manager = GI.UIManager;
         if(manager == null || manager.Camera == null) return;
 

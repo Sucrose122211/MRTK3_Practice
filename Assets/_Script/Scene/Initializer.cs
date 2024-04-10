@@ -1,5 +1,4 @@
 using Unity.Netcode;
-using UnityEditor.MPE;
 using UnityEngine;
 
 public enum EUSERTYPE{
@@ -19,10 +18,7 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
         #endif
 
         public static EUSERTYPE UserType;
-        string m_SceneName;
-
-        const string RecieverSceneName = "Server";
-        const string SenderSceneName = "PickMan";
+        private string SenderSceneName;
 
         [SerializeField] GameObject m_instancePrefab;
         [SerializeField] ProjectSceneManager m_sceneManager;
@@ -83,8 +79,8 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             else
             {
                 Debug.Log($"Client {clientId} Connected");
+                Debug.Log("Load Scene " + SenderSceneName);
                 m_sceneManager.External_OnSceneEvent += OnSceneEvent;
-                m_sceneManager.LoadScene(SenderSceneName);
             }
             
             spawnObject.Spawn();
@@ -105,6 +101,18 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             spawnObject.Spawn(false);
 
             GameInstance.I.UserType = userType;
+        }
+
+        public void OpenScene(string name)
+        {
+            if(!NetworkManager.Singleton.IsConnectedClient) return;
+            OpenSceneServerRPC(name);
+        }
+
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        private void OpenSceneServerRPC(string name)
+        {
+            m_sceneManager.LoadScene(name);
         }
     }
 }

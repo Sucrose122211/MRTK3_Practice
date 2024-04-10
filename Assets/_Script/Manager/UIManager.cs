@@ -6,7 +6,7 @@ using TMPro;
 
 public class UIManager : ManagerBase
 {
-    private Canvas _canvas;
+    // private Canvas _canvas;
     private Camera _camera;
     private GameInstance _GI;
 
@@ -15,11 +15,9 @@ public class UIManager : ManagerBase
     public override void OnAwake()
     {
         base.OnAwake();
-        _canvas = GameObject.FindAnyObjectByType<Canvas>();
-        _camera = GameObject.FindAnyObjectByType<Camera>();
+        OnSceneChange();
 
         // _canvas.renderMode = RenderMode.ScreenSpaceCamera;
-        _canvas.worldCamera = _camera;
         _GI = GameInstance.I;
     }
 
@@ -28,6 +26,8 @@ public class UIManager : ManagerBase
         base.OnSceneChange();
 
         _camera = GameObject.FindAnyObjectByType<Camera>();
-        _canvas.worldCamera = _camera;
+        var canvases = GameObject.FindObjectsOfType<Canvas>();
+
+        foreach(Canvas canvas in canvases) canvas.worldCamera = _camera;
     }
 }

@@ -38,7 +38,7 @@ public class FollowEyeGaze : MonoBehaviour
 
         switch(cursorType){
             case ECURSORTYPE.PLANE:
-                if (Physics.Raycast(manager.GazeOrigin, manager.GazeVector, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Background")))
+                if (Physics.Raycast(manager.RayOriginVector, manager.RayDirectionVector, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Background")))
                 {
                     transform.position = hit.point;
                     // TODO: normal 값으로 회전
@@ -46,10 +46,8 @@ public class FollowEyeGaze : MonoBehaviour
                 }
                 break;
             case ECURSORTYPE.DIST:
-                transform.position = manager.GazeOrigin + manager.GazeVector * cursorDepth;
+                transform.position = manager.RayOriginVector + manager.RayDirectionVector * cursorDepth;
                 break;
         }
-
-        transform.position = _initPosition;
     }
 }

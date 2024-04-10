@@ -18,5 +18,7 @@ public abstract class ManagerBase
 
     public virtual void OnUpdate() {}
 
+    public virtual void OnFixedUpdate() {}
+
     public virtual void OnSceneChange() {}
 }

@@ -61,6 +61,7 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             {
                 manager.OnStart();
             }
+            DontDestroyOnLoad(this);
         }
 
         void Update() {
@@ -68,6 +69,14 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             {
                 manager.OnUpdate();
             }
+        }
+
+        void FixedUpdate() 
+        {
+            foreach(ManagerBase manager in managers)
+            {
+                manager.OnFixedUpdate();
+            }     
         }
 
         void AwakeMangers()

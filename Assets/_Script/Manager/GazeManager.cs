@@ -21,7 +21,7 @@ public class GazeManager: ManagerBase
     private GazeMode gazeMode;
     public GazeMode GazeMode => gazeMode;
 
-    private const float threshold = 0.18f;
+    private const float threshold = 0.8f;
 
     public Vector3 GazeVector
     {
@@ -59,7 +59,7 @@ public class GazeManager: ManagerBase
     public Vector3 RayOriginVector
     {
         get {
-            if(movedAngle < threshold) return GazeOrigin;
+            if(gazeMode == GazeMode.EYE) return GazeOrigin;
             return HeadOrigin;
         }
     }
@@ -67,7 +67,7 @@ public class GazeManager: ManagerBase
     public Vector3 RayDirectionVector
     {
         get{
-            if(movedAngle < threshold) return GazeVector;
+            if(gazeMode == GazeMode.EYE) return GazeVector;
             return HeadVector;
         }
     }
@@ -88,12 +88,19 @@ public class GazeManager: ManagerBase
         base.OnUpdate();
 
         // Debug.Log($"{lastHeadVector}, {HeadVector}");
-        
+    
+    }
+
+    public override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+
         movedAngle = Vector3.Angle(lastHeadVector, HeadVector);
         lastHeadVector = HeadVector;
 
         if(movedAngle > threshold) gazeMode = GazeMode.HEAD;
         else gazeMode = GazeMode.EYE;
+
     }
 
     public override void OnSceneChange()

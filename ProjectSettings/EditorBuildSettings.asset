@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/PickMan.unity
     guid: da1b4f718f6d4c34da8901b21ff4011f
+  - enabled: 1
+    path: Assets/_Scenes/Bimodal.unity
+    guid: 7a3221c730284564888ad1c863bcb2f2
   - enabled: 0
     path: Assets/_Scenes/Server.unity
     guid: 2cda990e2423bbf4892e6590ba056729
