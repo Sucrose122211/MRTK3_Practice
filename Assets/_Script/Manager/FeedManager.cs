@@ -26,6 +26,13 @@ public class FeedManager : ManagerBase
         GI.CoroutineHelp(GenerateCoroutine());
     }
 
+    public override void OnSceneChange()
+    {
+        base.OnSceneChange();
+
+        GetFeedFactory();
+    }
+
     IEnumerator GenerateCoroutine()
     {
         if(_factory == null) yield break;
@@ -36,8 +43,10 @@ public class FeedManager : ManagerBase
         isTiming = true;
     }
 
-    public void GetFeedFactory(GameObject plane)
+    public void GetFeedFactory()
     {
+        GameObject plane;
+        plane = GameObject.FindObjectOfType<GamePlane>().gameObject;
         _factory ??= new FeedFactory(plane);
     }
 

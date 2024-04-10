@@ -7,18 +7,27 @@ using TMPro;
 public class UIManager : ManagerBase
 {
     private Canvas _canvas;
-    private TextMeshProUGUI _scoreBoard;
+    private Camera _camera;
     private GameInstance _GI;
 
-    public UIManager(Canvas canvas)
+    public Camera Camera => _camera;
+
+    public override void OnAwake()
     {
-        _canvas = canvas;
-        _scoreBoard = canvas.GetComponentInChildren<TextMeshProUGUI>();
+        base.OnAwake();
+        _canvas = GameObject.FindAnyObjectByType<Canvas>();
+        _camera = GameObject.FindAnyObjectByType<Camera>();
+
+        // _canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        _canvas.worldCamera = _camera;
         _GI = GameInstance.I;
     }
 
-    public void UpdateScore()
+    public override void OnSceneChange()
     {
-        _scoreBoard.text = $"Score: {_GI.Score}";
+        base.OnSceneChange();
+
+        _camera = GameObject.FindAnyObjectByType<Camera>();
+        _canvas.worldCamera = _camera;
     }
 }

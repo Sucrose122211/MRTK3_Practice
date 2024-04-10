@@ -4,16 +4,30 @@ using Microsoft.MixedReality.Toolkit.MultiUse;
 using MixedReality.Toolkit.Input;
 using UnityEngine;
 
+enum ECURSORTYPE{
+    PLANE, DIST
+}
+
 public class FollowEyeGaze : MonoBehaviour
 {
-    // [SerializeField] private float EyeGazeDepth;
+    [SerializeField] private float cursorDepth;
+    [SerializeField] ECURSORTYPE cursorType;
     private Vector3 _initPosition;
     // Start is called before the first frame update
     private GazeManager manager;
     void Start()
     {
-        if(GameInstance.I.UserType == EUSERTYPE.RECIEVER) gameObject.SetActive(false);
-        _initPosition = FindAnyObjectByType<GamePlane>().transform.position;
+        switch(cursorType){
+            case ECURSORTYPE.PLANE:
+                _initPosition = FindAnyObjectByType<GamePlane>().transform.position;
+                break;
+            case ECURSORTYPE.DIST:
+                _initPosition = Vector3.zero;
+                break;
+            default:
+                break;
+        }
+        
         manager = GameInstance.I.GazeManager;
     }
 
@@ -22,10 +36,18 @@ public class FollowEyeGaze : MonoBehaviour
     {
         if(manager == null) transform.position = _initPosition;
 
-        if (Physics.Raycast(manager.GazeOrigin, manager.GazeVector, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Background")))
-        {
-            transform.position = hit.point;
-            return;
+        switch(cursorType){
+            case ECURSORTYPE.PLANE:
+                if (Physics.Raycast(manager.GazeOrigin, manager.GazeVector, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Background")))
+                {
+                    transform.position = hit.point;
+                    // TODO: normal 값으로 회전
+                    return;
+                }
+                break;
+            case ECURSORTYPE.DIST:
+                transform.position = manager.GazeOrigin + manager.GazeVector * cursorDepth;
+                break;
         }
 
         transform.position = _initPosition;

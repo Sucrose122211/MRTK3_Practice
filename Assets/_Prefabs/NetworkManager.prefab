@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8060869785979350939}
   - component: {fileID: 8060869785979350938}
   - component: {fileID: 8060869785979350937}
+  - component: {fileID: 1305086394066390361}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -90,10 +91,22 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 127.0.0.1
+    Address: 143.248.232.90
     Port: 7777
-    ServerListenAddress: 127.0.0.1
+    ServerListenAddress: 0.0.0.0
   DebugSimulator:
     PacketDelayMS: 0
     PacketJitterMS: 0
     PacketDropRate: 0
+--- !u!114 &1305086394066390361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8060869785979350936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7910df7d5f4e7641bbe66fcb9aa9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

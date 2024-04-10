@@ -15,7 +15,6 @@ public class GameManager : BehaviourSingleton<GameManager>
         if(GameInstance.I.UserType == EUSERTYPE.RECIEVER) return;
         
         m_plane = FindObjectOfType<GamePlane>().gameObject;
-        GameInstance.I.FeedManager.GetFeedFactory(m_plane);
         GameInstance.I.GazeManager.GetGazeInteractor();
     }
 

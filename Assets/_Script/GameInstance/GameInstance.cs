@@ -24,8 +24,8 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
         private ProjectSceneManager m_SceneManager;
         public ProjectSceneManager SceneManager => m_SceneManager;
 
-        // private UIManager m_UIManager;
-        // public UIManager UIManager => m_UIManager;
+        private UIManager m_UIManager;
+        public UIManager UIManager => m_UIManager;
 
         private int _score;
 
@@ -41,12 +41,14 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
 
         private List<ManagerBase> managers;
 
+#region ManagerRoutine
         void Awake() {
             managers = new();
 
             m_GazeManager = new GazeManager();
             m_FeedManager = new FeedManager();
             m_DataManager = new DataManager();
+            m_UIManager = new UIManager();
 
             m_SceneManager = GetComponent<ProjectSceneManager>();
 
@@ -81,11 +83,21 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             yield break;
         }
 
+        public void OnSceneChange()
+        {
+            foreach(ManagerBase manager in managers)
+            {
+                manager.OnSceneChange();
+            }
+        }
+#endregion
+
+#region Utils
         private void OnDrawGizmos() {
             if(m_GazeManager == null) return;
             
             Gizmos.color = Color.red;
-            Gizmos.DrawRay(m_GazeManager.GazeOrigin, m_GazeManager.GazeVector);
+            Gizmos.DrawRay(m_GazeManager.HeadOrigin, m_GazeManager.HeadVector * 10);
         }
 
         public void CoroutineHelp(IEnumerator coroutine)
@@ -108,8 +120,9 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             
             managers.Remove(manager);
         }
+#endregion
 
-        #region Singleton
+#region Singleton
         private static GameInstance i = null;
 
         public static GameInstance I
@@ -131,6 +144,6 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
                 i = value;
             }
         }
-        #endregion
+#endregion
     }
 }

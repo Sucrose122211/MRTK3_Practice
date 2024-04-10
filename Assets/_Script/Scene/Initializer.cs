@@ -1,7 +1,5 @@
-
-// #define DEBUG
-
 using Unity.Netcode;
+using UnityEditor.MPE;
 using UnityEngine;
 
 public enum EUSERTYPE{
@@ -14,11 +12,13 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
     {
         #if UNITY_EDITOR
         [SerializeField] EUSERTYPE userType;
-        #elif STANDALONE_WIN
+        #elif UNITY_STANDALONE_WIN
         EUSERTYPE userType = EUSERTYPE.RECIEVER;
         #else
         EUSERTYPE userType = EUSERTYPE.SENDER;
         #endif
+
+        public static EUSERTYPE UserType;
         string m_SceneName;
 
         const string RecieverSceneName = "Server";
@@ -29,6 +29,10 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
 
         private NetworkObject spawnObject;
         // Start is called before the first frame update
+        void Awake()
+        {
+            UserType = userType;
+        }
         void Start()
         {
             switch(userType)
@@ -40,15 +44,8 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
 
                     NetworkManager.Singleton.OnServerStarted += OnServerStartedEvent;
                     NetworkManager.Singleton.OnClientConnectedCallback += OnConnectionEvent;
+                    NetworkManager.Singleton.OnClientDisconnectCallback += OnDisconnectionEvent;
                     NetworkManager.Singleton.StartServer();
-                    break;
-                case EUSERTYPE.SENDER:
-                    // SceneLoader.LoadScene(SenderSceneName);
-                    NetworkManager.Singleton.StartClient();
-                    var go = GameInstance.I;
-                    if(go == null) break;
-
-                    go.UserType = userType;
                     break;
                 default:
                     return;
@@ -61,6 +58,8 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             {
                 case SceneEventType.LoadComplete:
                     {
+                        GameInstance.I.OnSceneChange();
+                        GameInstance.I.SendEventRPC();
                         break;
                     }
                 case SceneEventType.UnloadComplete:
@@ -89,6 +88,13 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             }
             
             spawnObject.Spawn();
+        }
+
+        void OnDisconnectionEvent(ulong clientId)
+        {
+            if(NetworkManager.ConnectedClientsList.Count > 0) return;
+
+            m_sceneManager.LoadScene("Init");
         }
 
         void OnServerStartedEvent()
