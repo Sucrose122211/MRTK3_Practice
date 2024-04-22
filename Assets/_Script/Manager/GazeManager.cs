@@ -14,17 +14,21 @@ public class GazeManager: ManagerBase
     private FuzzyGazeInteractor _gazeInteractor;
     private Camera _head;
     private Vector3 lastHeadVector;
-    private float movedAngle;
+    private Vector3 lastGazeVector;
+    private float headMovedAngle;
+    private float gazeMovedAngle;
     private IGazeInteractable currentTarget;
 
-    public float MovedAngle => movedAngle;
+    public float MovedAngle => headMovedAngle;
 
     private GazeMode gazeMode;
     public GazeMode GazeMode => gazeMode;
 
-    private const float threshold = 0.8f;
-    private const float minTime = 0.5f;
-    private const float stopHeadThreshold = 1;
+    private const float headGazeThreshold = 20f;
+    private const float GazeOverThreshold = 10f;
+    private const float naturalTimeThreshold = 0.15f;
+    private const float stopHeadThreshold = 1.5f;
+    private const float stopEyeThreshold = 16f;
 
     public Vector3 GazeVector
     {
@@ -85,6 +89,7 @@ public class GazeManager: ManagerBase
 
         // if(_gazeInteractor == null || _head == null) return;
         lastHeadVector = HeadVector;
+        lastGazeVector = GazeVector;
         currentTarget = null;
     }
 
@@ -110,28 +115,40 @@ public class GazeManager: ManagerBase
     }
 
     float timer = 0;
-    Vector3 startVector = Vector3.forward;
     public override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
 
 #region BimodalGaze
-        movedAngle = Vector3.Angle(lastHeadVector, HeadVector);
+        headMovedAngle = Vector3.Angle(lastHeadVector, HeadVector);
         lastHeadVector = HeadVector;
-        if(movedAngle < stopHeadThreshold){
-            /* Head Stoped */
-            timer = 0;
-            startVector = HeadVector;
-            gazeMode = GazeMode.EYE;
-            return;
-        }
-        /*Head Moves*/
-        timer += Time.deltaTime;
-        if(timer > minTime && Vector3.Angle(startVector, HeadVector) > threshold)
+
+        gazeMovedAngle = Vector3.Angle(lastGazeVector, GazeVector);
+        lastGazeVector = GazeVector;
+
+        bool isHeadMoved = headMovedAngle > stopHeadThreshold;
+        bool isEyeMoved = gazeMovedAngle > stopEyeThreshold;
+
+        switch(gazeMode)
         {
-            gazeMode = GazeMode.HEAD;
+            case GazeMode.EYE:
+                if(!isHeadMoved) break;
+
+                timer += Time.deltaTime;
+                if(timer < naturalTimeThreshold) break;
+
+                float headGazeAngle = Vector3.Angle(HeadVector, GazeVector);
+                if(headGazeAngle > headGazeThreshold) 
+                    gazeMode = GazeMode.HEAD;
+                timer = 0;
+                break;
+
+            case GazeMode.HEAD:
+                if(isEyeMoved || Vector3.Angle(RayDirectionVector, GazeVector) > GazeOverThreshold) 
+                    gazeMode = GazeMode.EYE;
+                break;
+
         }
-        else gazeMode = GazeMode.EYE;
 #endregion
     }
 
