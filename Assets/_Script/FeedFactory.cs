@@ -17,8 +17,8 @@ public class FeedFactory
 
     public FeedFactory(GameObject plane)
     {
-        _pCenter = plane.transform.position;
-        var collider = plane.transform.GetComponentInChildren<Collider>();
+        _pCenter = plane == null ? Vector3.zero : plane.transform.position;
+        var collider = plane == null ? null : plane.transform.GetComponentInChildren<Collider>();
         
         _pHeight = collider == null ? 0 : collider.bounds.size.y;
         _pWidth = collider == null ? 0 : collider.bounds.size.x;

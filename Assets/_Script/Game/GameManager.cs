@@ -2,7 +2,7 @@ using Microsoft.MixedReality.Toolkit.MultiUse;
 using UnityEngine;
 
 public enum GameType{
-    PICKMAN, BIMODAL
+    PICKMAN, BIMODAL, FITTS
 }
 
 public class GameManager : BehaviourSingleton<GameManager>
@@ -17,14 +17,16 @@ public class GameManager : BehaviourSingleton<GameManager>
         switch(gameType)
         {
             case GameType.PICKMAN:
-            break;
+                GameInstance.I.AddManager(new FeedManager());
+                break;
             case GameType.BIMODAL:
-                GameInstance.I.RemoveManager(GameInstance.I.FeedManager);
-            break;
+                break;
+            case GameType.FITTS:
+                GameInstance.I.AddManager(new FittsManager());
+                break;
             default:
             break;
         }
     }
-
     
 }

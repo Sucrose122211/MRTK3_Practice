@@ -29,6 +29,7 @@ namespace data{
 
         public string GetPacket()
         {
+            Pack();
             string result = name + "\n";
             foreach(KeyValuePair<string, string> kv in Datas)
             {
@@ -37,5 +38,7 @@ namespace data{
             UnityEngine.Debug.Log(result);
             return result;
         }
+
+        public abstract void Pack();
     }
 }

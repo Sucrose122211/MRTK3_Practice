@@ -21,6 +21,10 @@ MonoBehaviour:
     m_Address: Feed
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: a781d0b1f787c6d4aa7aa7df688f1136
+    m_Address: FittsTarget
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1b54e8a744568a04ba38ce17353d5379, type: 2}
   m_SchemaSet:

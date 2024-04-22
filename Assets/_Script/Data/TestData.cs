@@ -7,5 +7,10 @@ namespace data {
         {
             name = typeof(TestData).FullName;
         }
+
+        public override void Pack()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

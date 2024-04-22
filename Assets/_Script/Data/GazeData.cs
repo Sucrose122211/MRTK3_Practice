@@ -7,5 +7,10 @@ namespace data
         {
             this.name = typeof(GazeData).FullName;
         }
+
+        public override void Pack()
+        {
+            
+        }
     }
 }

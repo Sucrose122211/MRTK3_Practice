@@ -9,10 +9,6 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
 {
     public partial class GameInstance : NetworkBehaviour
     {
-        private FeedManager m_FeedManager;
-
-        public FeedManager FeedManager => m_FeedManager;
-
         private GazeManager m_GazeManager;
 
         public GazeManager GazeManager => m_GazeManager;
@@ -46,13 +42,12 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             managers = new();
 
             m_GazeManager = new GazeManager();
-            m_FeedManager = new FeedManager();
             m_DataManager = new DataManager();
             m_UIManager = new UIManager();
 
             m_SceneManager = GetComponent<ProjectSceneManager>();
 
-            AwakeMangers();
+            // AwakeMangers();
             StartCoroutine(nameof(LoadingCoroutine));
         }
 
@@ -121,6 +116,7 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             if(managers.Contains(manager)) return;
 
             managers.Add(manager);
+            manager.OnAwake();
         }
 
         public void RemoveManager(ManagerBase manager)
@@ -128,6 +124,11 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             if(managers == null || !managers.Contains(manager)) return;
             
             managers.Remove(manager);
+        }
+
+        public T FindManager<T>() where T : ManagerBase
+        {
+            return (T)managers.Find(x => x is T);
         }
 #endregion
 
