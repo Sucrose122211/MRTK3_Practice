@@ -98,8 +98,6 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             var go = Instantiate(m_instancePrefab);
             spawnObject = go.GetComponent<NetworkObject>();
             spawnObject.Spawn(false);
-
-            GameInstance.I.UserType = userType;
         }
 
         public void OpenScene(string name)

@@ -9,7 +9,7 @@ namespace data{
     [System.Serializable]
     public abstract class ManagableData
     {
-        public Dictionary<String, String> Datas;
+        public Dictionary<string, string> Datas;
         protected string name = "";
         public ManagableData(){
             Datas = new();
@@ -33,12 +33,14 @@ namespace data{
             string result = name + "\n";
             foreach(KeyValuePair<string, string> kv in Datas)
             {
-                result += kv.Key + ": " + kv.Value;
+                result += kv.Key + ":" + kv.Value + '\n';
             }
             UnityEngine.Debug.Log(result);
             return result;
         }
 
-        public abstract void Pack();
+        public abstract void Pack();    // Class data to DataDict
+
+        public abstract void UnPack();  // DataDict to class data
     }
 }

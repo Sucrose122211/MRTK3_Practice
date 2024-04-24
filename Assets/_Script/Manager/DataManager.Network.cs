@@ -16,7 +16,7 @@ public partial class DataManager: ManagerBase
     IEnumerator FetchDataCoroutine(string packet)
     {
         yield return null;
-        Debug.Log("Recieved: " + packet);
+        Debug.Log("Recieved: " + packet.Length);
         string[] datas = packet.Split(parsingDelimeter);
 
         Type dataType;
@@ -30,10 +30,18 @@ public partial class DataManager: ManagerBase
 
         if(!typeof(ManagableData).IsAssignableFrom(dataType)) yield break;
 
-        var constructor = dataType.GetConstructor(Type.EmptyTypes);
-        var data = constructor.Invoke(null);
+        var data = Activator.CreateInstance(dataType) as ManagableData;
+        for(int i = 1; i < datas.Length; i++)
+        {
+            string[] kv = datas[i].Split(':');
+            if(kv.Length < 2) continue;
 
-        AddData(data);
+            data.Add(kv[0], kv[1]);
+        }
+
+        data.UnPack();
+        AddData(datas[0], data);
+
         Debug.Log($"Data - {data} Fetched");
     }
 

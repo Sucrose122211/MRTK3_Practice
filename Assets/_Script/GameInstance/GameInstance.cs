@@ -29,7 +29,7 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
 
         private int _score;
 
-        public EUSERTYPE UserType;
+        public EUSERTYPE UserType => NetworkManager.Singleton.IsServer ? EUSERTYPE.RECIEVER : EUSERTYPE.SENDER;
 
         public int Score{
             get{ return _score; }
@@ -53,7 +53,6 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             m_SceneManager = GetComponent<ProjectSceneManager>();
 
             // AwakeMangers();
-            StartCoroutine(nameof(LoadingCoroutine));
         }
 
         void Start() {

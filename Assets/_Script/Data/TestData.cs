@@ -12,5 +12,9 @@ namespace data {
         {
             throw new System.NotImplementedException();
         }
+        public override void UnPack()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

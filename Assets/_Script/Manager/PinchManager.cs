@@ -31,7 +31,8 @@ public class PinchManager : ManagerBase
     {
         base.OnAwake();
         Debug.Log("PinchManager");
-        if(!GameInstance.I.IsServer)
+        Debug.Log(NetworkManager.Singleton.IsServer);
+        if(!NetworkManager.Singleton.IsServer)
             GameInstance.I.CoroutineHelp(EnableWhenSubsystemAvailable());
     }
 

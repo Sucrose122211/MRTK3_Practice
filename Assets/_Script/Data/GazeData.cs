@@ -12,5 +12,10 @@ namespace data
         {
             
         }
+
+        public override void UnPack()
+        {
+            
+        }
     }
 }

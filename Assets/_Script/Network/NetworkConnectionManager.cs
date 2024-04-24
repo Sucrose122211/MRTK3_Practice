@@ -10,10 +10,7 @@ public class NetworkConnectionManager : MonoBehaviour
     {
         // SceneLoader.LoadScene(SenderSceneName);
         NetworkManager.Singleton.StartClient();
-        var go = GameInstance.I;
-        if(go == null) return;
 
-        go.UserType = EUSERTYPE.SENDER;
         return;
     }
 }

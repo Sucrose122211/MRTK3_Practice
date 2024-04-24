@@ -22,5 +22,14 @@ namespace data
             Add(nameof(Width), Width.ToString());
             Add(nameof(dist), dist.ToString());
         }
+
+        public override void UnPack()
+        {
+            x = float.Parse(Datas[nameof(x)]); 
+            y = float.Parse(Datas[nameof(y)]); 
+            Time = float.Parse(Datas[nameof(Time)]);
+            Width = float.Parse(Datas[nameof(Width)]);
+            dist = float.Parse(Datas[nameof(dist)]);
+        }
     }
 }
