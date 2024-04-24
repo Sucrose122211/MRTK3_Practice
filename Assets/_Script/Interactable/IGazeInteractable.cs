@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.MixedReality.Toolkit.MultiUse;
 using UnityEngine;
 
-public interface IGazeInteractable
+public interface IGazeInteractable: IInteractable
 {
     bool IsGazeOn { get; set; }
 

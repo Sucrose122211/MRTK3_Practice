@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using MixedReality.Toolkit;
 using MixedReality.Toolkit.Input;
+using MixedReality.Toolkit.Subsystems;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -22,6 +24,8 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
 
         private UIManager m_UIManager;
         public UIManager UIManager => m_UIManager;
+        private PinchManager m_PinchManager;
+        public PinchManager PinchManager => m_PinchManager;
 
         private int _score;
 
@@ -44,6 +48,7 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             m_GazeManager = new GazeManager();
             m_DataManager = new DataManager();
             m_UIManager = new UIManager();
+            m_PinchManager = new PinchManager();
 
             m_SceneManager = GetComponent<ProjectSceneManager>();
 
@@ -153,6 +158,21 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             {
                 i = value;
             }
+        }
+#endregion
+
+#region Interactable
+        public T[] GetAllInteractable<T>() where T : IInteractable
+        {
+            List<T> result = new();
+            foreach(ManagerBase manager in managers)
+            {
+                if(manager is T interactable)
+                {
+                    result.Add(interactable);
+                }
+            }
+            return result.ToArray();
         }
 #endregion
     }

@@ -28,6 +28,7 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
 
         public void SendDataRPC(string packet)
         {
+            Debug.Log("Send Packet Lenght: " + packet.Length);
             RecieveDataServerRPC(packet);
         }
 

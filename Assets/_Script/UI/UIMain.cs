@@ -26,13 +26,13 @@ public class UIMain : UIBase
     void Update()
     {
         GameInstance GI = GameInstance.I;
-        if(GI == null) return;
+        if(GI == null || GI.GazeManager == null) return;
         TxtGazeMode.text = "GazeMode: " + GI.GazeManager.GazeMode.ToString();
-        TxtHeadSpeed.text = "HeadSpeed: " + GameInstance.I.GazeManager.MovedAngle.ToString();
+        TxtHeadSpeed.text = "HeadSpeed: " + GI.GazeManager.MovedAngle.ToString();
         var manager = GI.UIManager;
         if(manager == null || manager.Camera == null) return;
 
-        transform.position = GI.GazeManager.HeadOrigin + GI.GazeManager.HeadVector * UIDist;
-        transform.rotation = Quaternion.LookRotation(manager.Camera.transform.forward);
+        transform.SetPositionAndRotation(GI.GazeManager.HeadOrigin + GI.GazeManager.HeadVector * UIDist,
+                                         Quaternion.LookRotation(manager.Camera.transform.forward));
     }
 }

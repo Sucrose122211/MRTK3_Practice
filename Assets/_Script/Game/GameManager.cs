@@ -1,4 +1,5 @@
 using Microsoft.MixedReality.Toolkit.MultiUse;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GameType{
@@ -22,7 +23,9 @@ public class GameManager : BehaviourSingleton<GameManager>
             case GameType.BIMODAL:
                 break;
             case GameType.FITTS:
+                if(GameInstance.I.UserType == EUSERTYPE.RECIEVER) break;
                 GameInstance.I.AddManager(new FittsManager());
+                GameInstance.I.FindManager<FittsManager>().StartTest();
                 break;
             default:
             break;

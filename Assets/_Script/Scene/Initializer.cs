@@ -75,6 +75,7 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             if (clientId == NetworkManager.Singleton.LocalClientId)
             {
                 Debug.Log("Server Connected");
+                spawnObject.Spawn();
             }
             else
             {
@@ -82,15 +83,13 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
                 Debug.Log("Load Scene " + SenderSceneName);
                 m_sceneManager.External_OnSceneEvent += OnSceneEvent;
             }
-            
-            spawnObject.Spawn();
         }
 
         void OnDisconnectionEvent(ulong clientId)
         {
             if(NetworkManager.ConnectedClientsList.Count > 0) return;
 
-            m_sceneManager.LoadScene("Init");
+            // m_sceneManager.LoadScene("Init");
         }
 
         void OnServerStartedEvent()

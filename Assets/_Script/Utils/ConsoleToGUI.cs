@@ -31,11 +31,13 @@ namespace DebugStuff
             Application.logMessageReceived -= Log;
         }
 
+        // bool debug = false;
         public void Log(string logString, string stackTrace, LogType type)
         {
             output = logString;
             stack = stackTrace;
             myLog = output + "\n" + myLog;
+            if(type == LogType.Exception || type == LogType.Error) return;
             if (myLog.Length > 5000)
             {
                 myLog = myLog.Substring(0, 4000);

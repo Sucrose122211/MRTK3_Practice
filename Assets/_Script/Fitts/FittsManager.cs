@@ -48,16 +48,14 @@ public class FittsManager : ManagerBase, IPinchInteractable
         if(!isTest) return;
 
         currentTarget =
-        currentTarget != null ? currentTarget : factory.GenerateTarget(idx++);
+        currentTarget != null ? currentTarget : factory?.GenerateTarget(idx++);
 
         timer += Time.deltaTime;
-
-        if(idx == targetNum) 
-            isTest = false;
     }
 
     public void OnPinch()
     {
+        Debug.Log("OnPinch");
         if(!isTest || currentTarget == null || GI == null) return;
 
         float time = timer;
@@ -78,5 +76,6 @@ public class FittsManager : ManagerBase, IPinchInteractable
         GI.SendDataRPC(data.GetPacket());
         Object.Destroy(currentTarget);
         currentTarget = null;
+        if(idx == targetNum) isTest = false;
     }
 }
