@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using data;
 using Microsoft.MixedReality.Toolkit.MultiUse;
 using UnityEngine;
+using Utils;
 
 public class FittsManager : ManagerBase, IPinchInteractable
 {
@@ -60,15 +61,13 @@ public class FittsManager : ManagerBase, IPinchInteractable
 
         float time = timer;
         timer = 0;
-        Vector3 target = currentTarget.transform.position - GI.GazeManager.GazeOrigin;
-        Vector3 normY = Vector3.Cross(target, Vector3.up);
-        Vector3 normX = Vector3.Cross(normY, target);
+        Vector2 RelPos = Utils.Utils.GetRelativePosition(currentTarget, GI.GazeManager.GazeVector, GI.GazeManager.GazeOrigin);
 
-        FittsData data = new FittsData
+        FittsData data = new()
         {
             Time = time,
-            x = Vector3.SignedAngle(target, GI.GazeManager.GazeVector, normX),
-            y = Vector3.SignedAngle(target, GI.GazeManager.GazeVector, normY),
+            x = RelPos.x,
+            y = RelPos.y,
             Width = targetWidth,
             dist = dist
         };
