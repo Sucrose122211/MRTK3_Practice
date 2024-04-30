@@ -14,6 +14,9 @@ public class FittsManager : ManagerBase, IPinchInteractable
     GameInstance GI;
     FittsFactory factory;
 
+    public float TargetAngle => targetAngle;
+    public float TargetWidth => targetWidth;
+
     const float targetAngle = 17;       // A [degree]
     const float targetWidth = 1.75f;    // W [degree]
     const int targetNum = 22;           // Number of targets

@@ -56,8 +56,7 @@ public class PinchManager : ManagerBase
         {
             toglePinch = true;
             Debug.Log("Pinch");
-            if(m_OnPinchEvent != null)
-                m_OnPinchEvent();
+            m_OnPinchEvent?.Invoke();
             var interactables = GameInstance.I.GetAllInteractable<IPinchInteractable>();
 
             if(interactables.Length == 0) return;
