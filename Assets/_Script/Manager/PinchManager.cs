@@ -44,6 +44,7 @@ public class PinchManager : ManagerBase
         Debug.Log(aggregator);
     }
 
+    // TOOD: 왼쪽, 오른쪽 핀치 분리
     public override void OnUpdate()
     {
         base.OnUpdate();

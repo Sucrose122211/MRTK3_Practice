@@ -113,14 +113,16 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             StartCoroutine(coroutine);
         }
 
-        public void AddManager(ManagerBase manager)
+        public ManagerBase AddManager(ManagerBase manager)
         {
             managers ??= new();
 
-            if(managers.Contains(manager)) return;
-
-            managers.Add(manager);
-            manager.OnAwake();
+            if(!managers.Contains(manager))
+            {
+                managers.Add(manager);
+                manager.OnAwake();
+            }
+            return managers.Find(x => x.Equals(manager));
         }
 
         public void RemoveManager(ManagerBase manager)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,10 @@ using UnityEngine.UI;
 
 public class PredictionSelection : ISelectionStrategy
 {
-    private Gaussian _statistic;
 
     public PredictionSelection()
     {
-        GetStatistic();
+        
     }
 
     public void OnSelect(out GameObject target)
@@ -29,7 +29,7 @@ public class PredictionSelection : ISelectionStrategy
             probs[i] = GetProbability(objects[i].gameObject);
         }
 
-        Debug.Log(probs);
+        Debug.Log(string.Join(", ", probs));
         var tmp = probs.ToList();
         target = objects[tmp.IndexOf(probs.Max())].gameObject;
     }
@@ -38,23 +38,10 @@ public class PredictionSelection : ISelectionStrategy
     {
         if(!obj.TryGetComponent<SelectableObject>(out var selectable)) return 0;
 
-        if(_statistic == null) GetStatistic();
+        var statistic = new Gaussian(selectable.Width, GameInstance.I.FindManager<FittsManager>().TargetAngle);
 
         Vector2 pos = Utils.Utils.GetRelativePosition(obj, GameInstance.I.GazeManager.GazeVector, GameInstance.I.GazeManager.GazeOrigin);
 
-        return _statistic.GetProbability(pos.x, pos.y);
-    }
-
-    private void GetStatistic()
-    {
-        _statistic = null;
-
-        if(GameInstance.I == null) return;
-
-        var manager = GameInstance.I.FindManager<FittsManager>();
-
-        if(manager == null) return;
-
-        _statistic = new Gaussian(manager.TargetWidth, manager.TargetAngle);
+        return statistic.GetProbability(pos.x, pos.y);
     }
 }

@@ -5,6 +5,10 @@ using Microsoft.MixedReality.Toolkit.MultiUse;
 using UnityEngine;
 using Utils;
 
+public enum EFITTSTYPE{
+    DATA, TEST
+}
+
 public class FittsManager : ManagerBase, IPinchInteractable
 {
     int idx;
@@ -13,14 +17,24 @@ public class FittsManager : ManagerBase, IPinchInteractable
     GameObject currentTarget;
     GameInstance GI;
     FittsFactory factory;
+    private readonly EFITTSTYPE fittsType;
 
     public float TargetAngle => targetAngle;
     public float TargetWidth => targetWidth;
+    public float TargetDist => dist;
 
     const float targetAngle = 17;       // A [degree]
     const float targetWidth = 1.75f;    // W [degree]
     const int targetNum = 22;           // Number of targets
     const float dist = 15;              // target distance
+
+    public FittsManager(EFITTSTYPE type) : base()
+    {
+        fittsType = type;
+        factory ??= new FittsFactory(
+            dist, targetAngle, targetWidth, targetNum, fittsType
+        );
+    }
 
     public override void OnAwake()
     {
@@ -30,9 +44,6 @@ public class FittsManager : ManagerBase, IPinchInteractable
         GI = GameInstance.I;
         timer = 0;
         currentTarget = null;
-        factory ??= new FittsFactory(
-            dist, targetAngle, targetWidth, targetNum
-        );
         idx = 0;
     }
 
@@ -51,6 +62,8 @@ public class FittsManager : ManagerBase, IPinchInteractable
 
         if(!isTest) return;
 
+        if(idx == targetNum && currentTarget == null) isTest = false;
+
         currentTarget =
         currentTarget != null ? currentTarget : factory?.GenerateTarget(idx++);
 
@@ -59,7 +72,6 @@ public class FittsManager : ManagerBase, IPinchInteractable
 
     public void OnPinch()
     {
-        Debug.Log("OnPinch");
         if(!isTest || currentTarget == null || GI == null) return;
 
         float time = timer;
@@ -76,8 +88,12 @@ public class FittsManager : ManagerBase, IPinchInteractable
         };
 
         GI.SendDataRPC(data.GetPacket());
+
+        GI.FindManager<SelectManager>().OnSelect(out var obj);
+        var target = obj.GetComponent<TestSelectObject>();
+        if(target != null && target.IsIntend) Debug.Log("Success");
+        
         Object.Destroy(currentTarget);
         currentTarget = null;
-        if(idx == targetNum) isTest = false;
     }
 }

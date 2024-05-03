@@ -9,7 +9,7 @@ public enum ESelcectionStrategy{
 public class SelectManager: ManagerBase
 {
     private ISelectionStrategy _stragtegy;
-    public SelectManager(ESelcectionStrategy strategy)
+    public SelectManager(ESelcectionStrategy strategy): base()
     {
         SetStrategy(strategy);
     }
