@@ -90,9 +90,19 @@ public class FittsManager : ManagerBase, IPinchInteractable
         GI.SendDataRPC(data.GetPacket());
 
         GI.FindManager<SelectManager>().OnSelect(out var obj);
-        var target = obj.GetComponent<TestSelectObject>();
-        if(target != null && target.IsIntend) Debug.Log("Success");
-        
+
+        if(fittsType == EFITTSTYPE.TEST)
+        {
+            var target = obj == null ? null : obj.GetComponent<TestSelectObject>();
+
+            TestData tdata = new(){
+                Trial = idx,
+                Success = target != null && target.IsIntend
+            };
+
+            GI.SendDataRPC(tdata.GetPacket());
+        }
+
         Object.Destroy(currentTarget);
         currentTarget = null;
     }
