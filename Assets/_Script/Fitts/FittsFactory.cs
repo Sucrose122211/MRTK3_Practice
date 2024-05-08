@@ -11,6 +11,8 @@ public class FittsFactory
     readonly float width;
     readonly int totalNum;
     readonly EFITTSTYPE type;
+    readonly float scaleFactor;
+
     const string dataPrefabName = "FittsTarget";
     const string testPrefabName = "TestTarget";
 
@@ -21,11 +23,12 @@ public class FittsFactory
         this.width = width/2f;
         this.totalNum = totalNum;
         this.type = type;
+
+        scaleFactor = dist * Mathf.Tan(this.width * Mathf.Deg2Rad);
     }
 
     public GameObject GenerateTarget(int idx)
     {
-        Debug.Log("Generate" + idx);
         int hidx = idx/2;
         Vector3 pos = Quaternion.Euler(-angle, 0, 0) * Vector3.forward;
         if(idx % 2 != 0) pos.y *= -1;
@@ -41,7 +44,7 @@ public class FittsFactory
         if (go == null) return null;
 
         go.transform.position = pos * dist;
-        go.transform.localScale = dist * Mathf.Tan(width * Mathf.Deg2Rad) * go.transform.localScale;
+        go.GetComponent<FittsTarget>().SetSize(scaleFactor);
 
         return go;
     }

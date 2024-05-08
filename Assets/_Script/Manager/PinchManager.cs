@@ -11,7 +11,8 @@ using UnityEngine.XR;
 public class PinchManager : ManagerBase
 {
     private HandsAggregatorSubsystem aggregator = null;
-    private bool toglePinch = false;
+    private bool togleRightPinch = false;
+    private bool togleLeftPinch = false;
     public delegate void OnPinchEvent();
     private OnPinchEvent m_OnPinchEvent;
 
@@ -51,25 +52,54 @@ public class PinchManager : ManagerBase
         
         if(aggregator == null || GameInstance.I.IsServer) return;
 
+        CheckRightPinch();
+        CheckLeftPinch();
+    }
+
+    private void CheckRightPinch()
+    {
         if (!aggregator.TryGetPinchProgress(XRNode.RightHand, out bool ready, out bool isPinch, out float pinchAmount)) return;
 
-        if(pinchAmount > 0.8f && !toglePinch)
+        if(pinchAmount > 0.8f && !togleRightPinch)
         {
-            toglePinch = true;
-            Debug.Log("Pinch");
+            togleRightPinch = true;
+            Debug.Log("Right Pinch");
             m_OnPinchEvent?.Invoke();
             var interactables = GameInstance.I.GetAllInteractable<IPinchInteractable>();
 
             if(interactables.Length == 0) return;
 
             foreach(IPinchInteractable interactable in interactables)
-                interactable.OnPinch();
+                interactable.OnRightPinch();
         }
-        if(pinchAmount < 0.8f && toglePinch)
+        if(pinchAmount < 0.8f && togleRightPinch)
         {
-            toglePinch = false;
+            togleRightPinch = false;
         }
-    }
+    }   
+
+    private void CheckLeftPinch()
+    {
+        if (!aggregator.TryGetPinchProgress(XRNode.LeftHand, out bool ready, out bool isPinch, out float pinchAmount)) return;
+
+        if(pinchAmount > 0.8f && !togleLeftPinch)
+        {
+            togleLeftPinch = true;
+            Debug.Log("Left Pinch");
+            m_OnPinchEvent?.Invoke();
+            var interactables = GameInstance.I.GetAllInteractable<IPinchInteractable>();
+
+            if(interactables.Length == 0) return;
+
+            foreach(IPinchInteractable interactable in interactables)
+                interactable.OnLeftPinch();
+        }
+        if(pinchAmount < 0.8f && togleLeftPinch)
+        {
+            togleLeftPinch = false;
+        }
+    }   
+
 
     public override void OnSceneChange()
     {

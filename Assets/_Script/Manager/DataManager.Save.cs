@@ -34,13 +34,15 @@ public partial class DataManager : ManagerBase
         {
             var datas = DataDict[kv.Key];
 
-            string ToJsonData = kv.Key;
+            string ToJsonData = kv.Key + "\n{\n";
+            int i = 0;
             foreach(ManagableData data in datas)
             {
-                ToJsonData += JsonUtility.ToJson(data) + '\n';
+                ToJsonData += "\"" + i.ToString() + "\":" + JsonUtility.ToJson(data, true) + ",\n";
+                i++;
             }
 
-            totalData += ToJsonData + '\n';
+            totalData += ToJsonData + "}\n";
         }
         string filePath = Application.persistentDataPath + "/" + DateTime.Now.ToString("yyyyMMdd") + '_' + fileName;
 

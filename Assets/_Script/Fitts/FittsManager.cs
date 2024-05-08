@@ -62,7 +62,11 @@ public class FittsManager : ManagerBase, IPinchInteractable
 
         if(!isTest) return;
 
-        if(idx == targetNum && currentTarget == null) isTest = false;
+        if(idx == targetNum && currentTarget == null) 
+        { 
+            isTest = false;
+            return;
+        }
 
         currentTarget =
         currentTarget != null ? currentTarget : factory?.GenerateTarget(idx++);
@@ -72,6 +76,12 @@ public class FittsManager : ManagerBase, IPinchInteractable
 
     public void OnPinch()
     {
+        
+    }
+
+    public void OnRightPinch()
+    {
+        Debug.Log(isTest + " " + currentTarget);
         if(!isTest || currentTarget == null || GI == null) return;
 
         float time = timer;
@@ -105,5 +115,12 @@ public class FittsManager : ManagerBase, IPinchInteractable
 
         Object.Destroy(currentTarget);
         currentTarget = null;
+    }
+
+    public void OnLeftPinch()
+    {
+        if(isTest) return;
+
+        StartTest();
     }
 }
