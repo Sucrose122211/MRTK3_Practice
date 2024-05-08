@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -20,10 +21,10 @@ public partial class DataManager : ManagerBase
             ToJsonData += JsonUtility.ToJson(data) + '\n';
         }
         
-        string filePath = Application.persistentDataPath + "/" + fileName;
+        string filePath = Application.persistentDataPath + "/" + DateTime.Now.ToString("yyyyMMdd") + '_' + fileName;
 
         File.WriteAllText(filePath, ToJsonData);
-        Debug.Log(fileName + " saved");
+        // Debug.Log(filePath + " saved");
     }
 
     public void ExportAllJSON()
@@ -41,7 +42,7 @@ public partial class DataManager : ManagerBase
 
             totalData += ToJsonData + '\n';
         }
-        string filePath = Application.persistentDataPath + "/" + fileName;
+        string filePath = Application.persistentDataPath + "/" + DateTime.Now.ToString("yyyyMMdd") + '_' + fileName;
 
         File.WriteAllText(filePath, totalData);
         Debug.Log(fileName + " saved in " + filePath);

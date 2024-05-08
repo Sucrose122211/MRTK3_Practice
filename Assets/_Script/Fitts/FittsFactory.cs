@@ -25,10 +25,11 @@ public class FittsFactory
 
     public GameObject GenerateTarget(int idx)
     {
+        Debug.Log("Generate" + idx);
         int hidx = idx/2;
-        Vector3 pos = Quaternion.Euler(angle, 0, 0) * Vector3.forward;
+        Vector3 pos = Quaternion.Euler(-angle, 0, 0) * Vector3.forward;
         if(idx % 2 != 0) pos.y *= -1;
-        pos = Quaternion.Euler(0, 0, hidx * 2 * Mathf.PI / totalNum * Mathf.Rad2Deg) * pos;
+        pos = Quaternion.Euler(0, 0, -hidx * 2 * Mathf.PI / totalNum * Mathf.Rad2Deg) * pos;
 
         string prefab = type switch
         {

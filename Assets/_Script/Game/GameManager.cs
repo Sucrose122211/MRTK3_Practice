@@ -26,6 +26,7 @@ public class GameManager : BehaviourSingleton<GameManager>
             case GameType.FITTS:
                 if(GameInstance.I.UserType == EUSERTYPE.RECIEVER) break;
                 var fmanager = new FittsManager(EFITTSTYPE.DATA);
+                new SelectManager(selcectionStrategy);
                 fmanager.StartTest();
                 break;
             case GameType.FITTSTEST:                

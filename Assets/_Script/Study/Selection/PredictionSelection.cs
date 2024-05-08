@@ -28,6 +28,11 @@ public class PredictionSelection : ISelectionStrategy
         {
             probs[i] = GetProbability(objects[i].gameObject);
         }
+        float s = probs.Sum();
+        for(int i = 0; i < objects.Length; i++)
+        {
+            probs[i] = probs[i] / s * 100;
+        }
 
         Debug.Log(string.Join(", ", probs));
         var tmp = probs.ToList();
