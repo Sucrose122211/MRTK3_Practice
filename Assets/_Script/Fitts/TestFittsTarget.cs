@@ -11,12 +11,10 @@ public class TestFittsTarget : FittsTarget
     void Start()
     {
         center = transform.GetChild(0);
-        Debug.Log(center);
         distractors = new Transform[transform.childCount-1];
         for(int i = 1; i < transform.childCount; i++)
         {
             distractors[i-1] = transform.GetChild(i);
-            Debug.Log(distractors[i-1]);
         }
     }
 

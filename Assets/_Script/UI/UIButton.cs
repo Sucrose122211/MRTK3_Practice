@@ -4,9 +4,15 @@ using Microsoft.MixedReality.Toolkit.MultiUse;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum EBUTTONTYPE
+{
+    SAVE, CLEAR
+}
+
 public class UIButton : UIBase
 {
     // Start is called before the first frame update
+    [SerializeField] private EBUTTONTYPE tpye;
     private Button m_button;
     public Button Button => m_button;
     void Start()
@@ -22,8 +28,17 @@ public class UIButton : UIBase
         IEnumerator OnClickEvent()
         {
             yield return new WaitUntil(() => GameInstance.I != null);
-            Debug.Log("Event Allocate");
-            m_button.onClick.AddListener(GameInstance.I.DataManager.ExportAllJSON);
+            switch(tpye)
+            {
+                case EBUTTONTYPE.SAVE:
+                    m_button.onClick.AddListener(GameInstance.I.DataManager.ExportAllJSON);
+                    break;
+                case EBUTTONTYPE.CLEAR:
+                    m_button.onClick.AddListener(GameInstance.I.DataManager.ClearData);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

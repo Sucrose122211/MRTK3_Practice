@@ -62,4 +62,9 @@ public partial class DataManager : ManagerBase
         }
         return null;
     }
+
+    public void ClearData()
+    {
+        DataDict.Clear();
+    }
 }

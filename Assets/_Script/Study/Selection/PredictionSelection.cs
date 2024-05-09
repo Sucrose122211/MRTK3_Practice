@@ -47,6 +47,8 @@ public class PredictionSelection : ISelectionStrategy
 
         Vector2 pos = Utils.Utils.GetRelativePosition(obj, GameInstance.I.GazeManager.GazeVector, GameInstance.I.GazeManager.GazeOrigin);
 
+        Debug.Log(pos);
+
         return statistic.GetProbability(pos.x, pos.y);
     }
 }

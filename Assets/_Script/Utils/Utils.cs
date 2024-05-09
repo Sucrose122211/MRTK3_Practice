@@ -14,10 +14,13 @@ namespace Utils
             if(target == null) return Vector2.zero;
 
             Vector3 targetPos = target.transform.position - origin;
-            Vector3 normY = Vector3.Cross(targetPos, Vector3.up);
-            Vector3 normX = Vector3.Cross(normY, targetPos);
-            float x = Vector3.SignedAngle(targetPos, worldPos, normX);
-            float y = Vector3.SignedAngle(targetPos, worldPos, normY);
+            Vector3 normY = Vector3.Cross(targetPos, Vector3.up).normalized;
+            Vector3 normX = Vector3.Cross(normY, targetPos).normalized;
+            // Debug.Log(normX + " " + normY);
+            Vector3 worldPosX = Vector3.ProjectOnPlane(worldPos, normX);
+            Vector3 worldPosY = Vector3.ProjectOnPlane(worldPos, normY);
+            float x = Vector3.SignedAngle(targetPos, worldPosX, normX);
+            float y = Vector3.SignedAngle(targetPos, worldPosY, normY);
             return new Vector2(x, y);
         }
     }

@@ -232,7 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1688894732344710373}
   - component: {fileID: 6628781425176142453}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: TestTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}

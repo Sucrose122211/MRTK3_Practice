@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7571761691285694075
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -160}
+  m_AnchoredPosition: {x: 0, y: -14}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7571761691285694076
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -163,7 +163,7 @@ RectTransform:
   m_GameObject: {fileID: 7571761691847414937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.00019140981, y: 0.00019140981, z: 0.00019140981}
+  m_LocalScale: {x: 0.00007636486, y: 0.00007636486, z: 0.00007636486}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7571761692025111914}
@@ -173,7 +173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.2, y: -0.2}
   m_SizeDelta: {x: 800, y: 603.26086}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7571761691847414917
@@ -273,7 +273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -118}
+  m_AnchoredPosition: {x: 0, y: -224}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7571761692025111912
@@ -383,6 +383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7571761692082431167}
   - component: {fileID: 7571761692082431166}
+  - component: {fileID: 840373910}
   m_Layer: 0
   m_Name: UI_HMD
   m_TagString: Untagged
@@ -420,4 +421,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TxtGazeMode: {fileID: 7571761692025111913}
   TxtHeadSpeed: {fileID: 7571761691285694077}
-  UIDist: 0.1
+  UIDist: 0.5
+--- !u!114 &840373910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7571761692082431152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd109dc38a23b343ac795dc2dba42d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

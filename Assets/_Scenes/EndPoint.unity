@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameType: 3
-  selcectionStrategy: 0
+  selcectionStrategy: 1
 --- !u!4 &814929543
 Transform:
   m_ObjectHideFlags: 0

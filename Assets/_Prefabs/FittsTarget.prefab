@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 319954146140957680}
   - component: {fileID: -3587986704641492188}
   - component: {fileID: -6035669124322874238}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FittsTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -24,7 +24,7 @@ public class FittsManager : ManagerBase, IPinchInteractable
     public float TargetDist => dist;
 
     const float targetAngle = 17;       // A [degree]
-    const float targetWidth = 1.75f;    // W [degree]
+    const float targetWidth = 2f;    // W [degree]
     const int targetNum = 22;           // Number of targets
     const float dist = 15;              // target distance
 
@@ -81,7 +81,6 @@ public class FittsManager : ManagerBase, IPinchInteractable
 
     public void OnRightPinch()
     {
-        Debug.Log(isTest + " " + currentTarget);
         if(!isTest || currentTarget == null || GI == null) return;
 
         float time = timer;
