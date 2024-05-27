@@ -49,4 +49,27 @@ public partial class DataManager : ManagerBase
         File.WriteAllText(filePath, totalData);
         Debug.Log(fileName + " saved in " + filePath);
     }
+
+    public void ExportAllJSON(string filename)
+    {
+        string totalData = "";
+        foreach(KeyValuePair<string, List<ManagableData>> kv in DataDict)
+        {
+            var datas = DataDict[kv.Key];
+
+            string ToJsonData = kv.Key + "\n{\n";
+            int i = 0;
+            foreach(ManagableData data in datas)
+            {
+                ToJsonData += "\"" + i.ToString() + "\":" + JsonUtility.ToJson(data, true) + ",\n";
+                i++;
+            }
+
+            totalData += ToJsonData + "}\n";
+        }
+        string filePath = Application.persistentDataPath + "/" + DateTime.Now.ToString("yyyyMMdd") + '_' + filename + ".json";
+
+        File.WriteAllText(filePath, totalData);
+        Debug.Log(fileName + " saved in " + filePath);
+    }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.MixedReality.Toolkit.MultiUse;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ public class FittsFactory
     readonly int totalNum;
     readonly EFITTSTYPE type;
     readonly float scaleFactor;
+
+    private GazeManager gazeManager;
 
     const string dataPrefabName = "FittsTarget";
     const string testPrefabName = "TestTarget";
@@ -25,6 +28,7 @@ public class FittsFactory
         this.type = type;
 
         scaleFactor = dist * Mathf.Tan(this.width * Mathf.Deg2Rad);
+        gazeManager = GameInstance.I.GazeManager;
     }
 
     public GameObject GenerateTarget(int idx)
@@ -43,7 +47,11 @@ public class FittsFactory
         GameObject go = Utils.Resource.Instantiate(prefab);
         if (go == null) return null;
 
-        go.transform.position = pos * dist;
+        float rot = hidx * 2 * Mathf.PI / totalNum + (idx%2 == 0 ? 0 : Mathf.PI);
+
+        go.transform.position = gazeManager.GazeOrigin + pos * dist;
+        go.transform.rotation = Quaternion.Euler(0, 0, -rot * Mathf.Rad2Deg);
+        Debug.Log("up: " + go.transform.up);
         go.GetComponent<FittsTarget>().SetSize(scaleFactor);
 
         return go;

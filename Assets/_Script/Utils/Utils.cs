@@ -14,13 +14,35 @@ namespace Utils
             if(target == null) return Vector2.zero;
 
             Vector3 targetPos = target.transform.position - origin;
-            Vector3 normY = Vector3.Cross(targetPos, Vector3.up).normalized;
+            Vector3 normY = target.transform.up.normalized;
+            Vector3 normX = Vector3.Cross(normY, targetPos).normalized;
+            Debug.Log("X axis: " + normY + " Y axis: " + normX + " Target: " + targetPos);
+            
+            Vector3 worldProjX = Vector3.ProjectOnPlane(worldPos, normX);
+            Vector3 worldProjY = Vector3.ProjectOnPlane(worldPos, normY);
+            Debug.Log("Proj X: " + worldProjX + " Proj Y: " + worldProjY);
+
+            Vector3 targetProjX = Vector3.ProjectOnPlane(targetPos, normX);
+            Vector3 targetProjY = Vector3.ProjectOnPlane(targetPos, normY);
+
+
+            float x = Vector3.SignedAngle(worldProjX, targetProjX, normX);
+            float y = Vector3.SignedAngle(worldProjY, targetProjY, normY);
+            return new Vector2(x, y);
+        }
+
+        public static Vector2 GetRelativePosition(GameObject target, Vector3 worldPos, Vector3 origin, Vector2 ax)
+        {
+            if(target == null) return Vector2.zero;
+
+            Vector3 targetPos = target.transform.position - origin;
+            Vector3 normY = ax.normalized;
             Vector3 normX = Vector3.Cross(normY, targetPos).normalized;
             // Debug.Log(normX + " " + normY);
             Vector3 worldPosX = Vector3.ProjectOnPlane(worldPos, normX);
             Vector3 worldPosY = Vector3.ProjectOnPlane(worldPos, normY);
-            float x = Vector3.SignedAngle(targetPos, worldPosX, normX);
-            float y = Vector3.SignedAngle(targetPos, worldPosY, normY);
+            float x = Vector3.SignedAngle(worldPosX, targetPos, normX);
+            float y = Vector3.SignedAngle(worldPosY, targetPos, normY);
             return new Vector2(x, y);
         }
     }

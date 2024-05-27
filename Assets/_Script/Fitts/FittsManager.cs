@@ -87,6 +87,8 @@ public class FittsManager : ManagerBase, IPinchInteractable
         timer = 0;
         Vector2 RelPos = Utils.Utils.GetRelativePosition(currentTarget, GI.GazeManager.GazeVector, GI.GazeManager.GazeOrigin);
 
+        Debug.Log(RelPos);
+
         FittsData data = new()
         {
             Time = time,
