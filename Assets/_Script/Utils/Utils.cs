@@ -16,11 +16,9 @@ namespace Utils
             Vector3 targetPos = target.transform.position - origin;
             Vector3 normY = target.transform.up.normalized;
             Vector3 normX = Vector3.Cross(normY, targetPos).normalized;
-            Debug.Log("X axis: " + normY + " Y axis: " + normX + " Target: " + targetPos);
             
             Vector3 worldProjX = Vector3.ProjectOnPlane(worldPos, normX);
             Vector3 worldProjY = Vector3.ProjectOnPlane(worldPos, normY);
-            Debug.Log("Proj X: " + worldProjX + " Proj Y: " + worldProjY);
 
             Vector3 targetProjX = Vector3.ProjectOnPlane(targetPos, normX);
             Vector3 targetProjY = Vector3.ProjectOnPlane(targetPos, normY);

@@ -10,6 +10,8 @@ using UnityEngine.XR;
 
 public class PinchManager : ManagerBase
 {
+    private const float pinchThreshold = 0.95f;
+    private const float unpinchThreshold = 0.5f;
     private HandsAggregatorSubsystem aggregator = null;
     private bool togleRightPinch = false;
     private bool togleLeftPinch = false;
@@ -60,7 +62,7 @@ public class PinchManager : ManagerBase
     {
         if (!aggregator.TryGetPinchProgress(XRNode.RightHand, out bool ready, out bool isPinch, out float pinchAmount)) return;
 
-        if(pinchAmount > 0.8f && !togleRightPinch)
+        if(pinchAmount > pinchThreshold && !togleRightPinch)
         {
             togleRightPinch = true;
             Debug.Log("Right Pinch");
@@ -72,7 +74,7 @@ public class PinchManager : ManagerBase
             foreach(IPinchInteractable interactable in interactables)
                 interactable.OnRightPinch();
         }
-        if(pinchAmount < 0.8f && togleRightPinch)
+        if(pinchAmount < unpinchThreshold && togleRightPinch)
         {
             togleRightPinch = false;
         }
@@ -82,7 +84,7 @@ public class PinchManager : ManagerBase
     {
         if (!aggregator.TryGetPinchProgress(XRNode.LeftHand, out bool ready, out bool isPinch, out float pinchAmount)) return;
 
-        if(pinchAmount > 0.8f && !togleLeftPinch)
+        if(pinchAmount > pinchThreshold && !togleLeftPinch)
         {
             togleLeftPinch = true;
             Debug.Log("Left Pinch");
@@ -94,7 +96,7 @@ public class PinchManager : ManagerBase
             foreach(IPinchInteractable interactable in interactables)
                 interactable.OnLeftPinch();
         }
-        if(pinchAmount < 0.8f && togleLeftPinch)
+        if(pinchAmount < unpinchThreshold && togleLeftPinch)
         {
             togleLeftPinch = false;
         }

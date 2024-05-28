@@ -44,7 +44,7 @@ public class FittsManager : ManagerBase, IPinchInteractable
         GI = GameInstance.I;
         timer = 0;
         currentTarget = null;
-        idx = 0;
+        idx = 1;
     }
 
     public void StartTest()
@@ -53,7 +53,7 @@ public class FittsManager : ManagerBase, IPinchInteractable
 
         isTest = true;
         timer = 0;
-        idx = 0;
+        idx = 1;
     }
 
     public override void OnUpdate()
@@ -110,12 +110,12 @@ public class FittsManager : ManagerBase, IPinchInteractable
                 Trial = idx,
                 Success = target != null && target.IsIntend
             };
-
+            Debug.Log("Attempt " + idx + " : " + tdata.Success);
             GI.SendDataRPC(tdata.GetPacket());
         }
 
-        Object.Destroy(currentTarget);
-        currentTarget = null;
+        // Object.Destroy(currentTarget);
+        // currentTarget = null;
     }
 
     public void OnLeftPinch()

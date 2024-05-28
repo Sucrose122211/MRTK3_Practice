@@ -105,7 +105,7 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             if(m_GazeManager == null) return;
             
             Gizmos.color = Color.red;
-            Gizmos.DrawRay(m_GazeManager.HeadOrigin, m_GazeManager.HeadVector * 10);
+            Gizmos.DrawRay(m_GazeManager.GazeOrigin, m_GazeManager.GazeVector * 22);
         }
 
         public void CoroutineHelp(IEnumerator coroutine)

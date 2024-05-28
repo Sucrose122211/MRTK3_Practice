@@ -30,7 +30,7 @@ public class TestFittsTarget : FittsTarget
             var target = distractors[i];
             target.localScale = distractorScale;
             Vector3 dir = (target.position - center.position).normalized;
-            target.position = center.position + dir * (center.localScale.x + size * 2);
+            target.position = center.position + dir * (distractorSize * 0.5f + size * 1.5f);
         }
     }
 
