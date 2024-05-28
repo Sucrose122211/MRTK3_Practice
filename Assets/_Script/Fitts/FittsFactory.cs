@@ -45,14 +45,16 @@ public class FittsFactory
             _ => dataPrefabName
         };
         GameObject go = Utils.Resource.Instantiate(prefab);
+
         if (go == null) return null;
 
         float rot = hidx * 2 * Mathf.PI / totalNum + (idx%2 == 0 ? 0 : Mathf.PI);
 
         go.transform.position = gazeManager.GazeOrigin + pos * dist;
-        go.transform.rotation = Quaternion.Euler(0, 0, -rot * Mathf.Rad2Deg);
-        Debug.Log("up: " + go.transform.up);
-        go.GetComponent<FittsTarget>().SetSize(scaleFactor);
+
+        var target = go.GetComponent<FittsTarget>();
+        target.SetSize(scaleFactor);
+        target.SetRotation(Quaternion.Euler(0, 0, -rot * Mathf.Rad2Deg));
 
         return go;
     }

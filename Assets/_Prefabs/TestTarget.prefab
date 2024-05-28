@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a23b1f3843cf1f4683c022dfa1d865b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distractorSize: 1
 --- !u!1 &2566147456428750059
 GameObject:
   m_ObjectHideFlags: 0

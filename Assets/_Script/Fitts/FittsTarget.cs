@@ -20,4 +20,9 @@ public class FittsTarget : MonoBehaviour
     {
         gameObject.transform.localScale = size * new Vector3(1,1,1);
     }
+
+    public virtual void SetRotation(Quaternion rotation)
+    {
+        gameObject.transform.rotation = rotation;
+    }
 }
