@@ -16,8 +16,10 @@ public class FittsFactory
 
     private GazeManager gazeManager;
 
+    public Vector3 Center;
+
     const string dataPrefabName = "FittsTarget";
-    const string testPrefabName = "TestTarget";
+    const string testPrefabName = "SquareTarget";
 
     public FittsFactory(float dist, float angle, float width, int totalNum, EFITTSTYPE type)
     {
@@ -50,7 +52,8 @@ public class FittsFactory
 
         float rot = hidx * 2 * Mathf.PI / totalNum + (idx%2 == 0 ? 0 : Mathf.PI);
 
-        go.transform.position = gazeManager.GazeOrigin + pos * dist;
+        go.transform.position = gazeManager.GazeOrigin + dist * 1/Mathf.Cos(angle * Mathf.Deg2Rad) * pos;
+        Center = gazeManager.GazeOrigin + Vector3.forward * dist;
 
         var target = go.GetComponent<FittsTarget>();
         target.SetSize(scaleFactor);

@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ESelcectionStrategy{
+public enum ESelectionStrategy{
     VBC, PREDICTION,
 }
 
 public class SelectManager: ManagerBase
 {
     private ISelectionStrategy _stragtegy;
-    public SelectManager(ESelcectionStrategy strategy): base()
+    public SelectManager(ESelectionStrategy strategy): base()
     {
         SetStrategy(strategy);
     }
 
-    public void SetStrategy(ESelcectionStrategy strategy)
+    public void SetStrategy(ESelectionStrategy strategy)
     {
         _stragtegy = strategy switch
         {
-            ESelcectionStrategy.VBC => new VBCSelection(),
-            ESelcectionStrategy.PREDICTION => new PredictionSelection(),
+            ESelectionStrategy.VBC => new VBCSelection(),
+            ESelectionStrategy.PREDICTION => new PredictionSelection(),
             _ => null,
         };
     }

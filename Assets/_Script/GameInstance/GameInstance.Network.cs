@@ -22,6 +22,7 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             if(IsOwner) return;
 
             OnSceneChange();
+            SetStrategy(m_selectionStrategy);
 
             Debug.Log("Recieved EventRPC");
         }

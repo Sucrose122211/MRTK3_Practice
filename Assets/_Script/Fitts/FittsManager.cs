@@ -16,7 +16,7 @@ public class FittsManager : ManagerBase, IPinchInteractable
     float timer;
     GameObject currentTarget;
     GameInstance GI;
-    FittsFactory factory;
+    readonly FittsFactory factory;
     private readonly EFITTSTYPE fittsType;
 
     public float TargetAngle => targetAngle;
@@ -24,7 +24,7 @@ public class FittsManager : ManagerBase, IPinchInteractable
     public float TargetDist => dist;
 
     const float targetAngle = 17;       // A [degree]
-    const float targetWidth = 2f;    // W [degree]
+    const float targetWidth = 1.4f;    // W [degree]
     const int targetNum = 22;           // Number of targets
     const float dist = 15;              // target distance
 
@@ -44,7 +44,7 @@ public class FittsManager : ManagerBase, IPinchInteractable
         GI = GameInstance.I;
         timer = 0;
         currentTarget = null;
-        idx = 1;
+        idx = 0;
     }
 
     public void StartTest()
@@ -53,7 +53,7 @@ public class FittsManager : ManagerBase, IPinchInteractable
 
         isTest = true;
         timer = 0;
-        idx = 1;
+        idx = 0;
     }
 
     public override void OnUpdate()
@@ -85,7 +85,7 @@ public class FittsManager : ManagerBase, IPinchInteractable
 
         float time = timer;
         timer = 0;
-        Vector2 RelPos = Utils.Utils.GetRelativePosition(currentTarget, GI.GazeManager.GazeVector, GI.GazeManager.GazeOrigin);
+        Vector2 RelPos = Utils.Utils.GetRelativePosition(currentTarget, GI.GazeManager.GazeVector, GI.GazeManager.GazeOrigin, currentTarget.transform.position - factory.Center);
 
         Debug.Log(RelPos);
 
@@ -114,8 +114,8 @@ public class FittsManager : ManagerBase, IPinchInteractable
             GI.SendDataRPC(tdata.GetPacket());
         }
 
-        // Object.Destroy(currentTarget);
-        // currentTarget = null;
+        Object.Destroy(currentTarget);
+        currentTarget = null;
     }
 
     public void OnLeftPinch()

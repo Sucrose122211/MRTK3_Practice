@@ -36,10 +36,10 @@ public class TestFittsTarget : FittsTarget
 
     public override void SetRotation(Quaternion rotation)
     {
-        center.rotation = rotation;
+        // center.Rotate(rotation.eulerAngles);
 
-        foreach(Transform distractor in distractors)
-            distractor.rotation = rotation;
+        // foreach(Transform distractor in distractors)
+        //     distractor.Rotate(rotation.eulerAngles);
     }
 }
 

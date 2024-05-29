@@ -23,6 +23,8 @@ public class PredictionSelection : ISelectionStrategy
 
         var objects = GameObject.FindObjectsOfType<SelectableObject>();
 
+        Debug.Log(objects.Length);
+
         float[] probs = new float[objects.Length];
         for(int i = 0; i < objects.Length; i++)
         {

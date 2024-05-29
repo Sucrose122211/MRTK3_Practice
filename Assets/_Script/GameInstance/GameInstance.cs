@@ -30,7 +30,8 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
         private int _score;
 
         public EUSERTYPE UserType => NetworkManager.Singleton.IsServer ? EUSERTYPE.RECIEVER : EUSERTYPE.SENDER;
-
+        private ESelectionStrategy m_selectionStrategy;
+        public ESelectionStrategy SelectionStrategy => m_selectionStrategy;
         public int Score{
             get{ return _score; }
             set{ 
@@ -97,6 +98,14 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             {
                 manager.OnSceneChange();
             }
+        }
+#endregion
+
+#region Strategy
+        public void SetStrategy(ESelectionStrategy strategy)
+        {
+            Debug.Log("SetStrategy: " + strategy);
+            m_selectionStrategy = strategy;
         }
 #endregion
 

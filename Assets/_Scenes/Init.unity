@@ -209,7 +209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8060869785979350937, guid: 7f6de1b841e56f6448dd44fb0fb0a710, type: 3}
       propertyPath: ConnectionData.Address
-      value: 143.248.232.114
+      value: 143.248.232.124
       objectReference: {fileID: 0}
     - target: {fileID: 8060869785979350939, guid: 7f6de1b841e56f6448dd44fb0fb0a710, type: 3}
       propertyPath: m_RootOrder
@@ -403,6 +403,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 412322799}
   m_CullTransparentMesh: 1
+--- !u!1 &459984662 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7776007855563873074, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+  m_PrefabInstance: {fileID: 2001384621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &459984666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459984662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c18ca47a895bf439109c2a9d3b2e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initializer: {fileID: 1854413041}
 --- !u!1001 &505118064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2076,6 +2094,7 @@ MonoBehaviour:
   userType: 0
   m_instancePrefab: {fileID: 1101495286730028195, guid: 808094e24bbab8c4ea996683ee6eab01, type: 3}
   m_sceneManager: {fileID: 1427286833}
+  selectionStrategy: 0
 --- !u!114 &1854413042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2243,6 +2262,62 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6922232474701558454, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <ToggleMode>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1854413041}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 459984666}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleStrategy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ToggleText
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Microsoft.MixedReality.Toolkit.MultiUse.Initializer, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UIToggleText, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922232475148799399, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}
+      propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7776007856328844321, guid: 180d4d2203473be4fa3fef18d0bec80e, type: 3}

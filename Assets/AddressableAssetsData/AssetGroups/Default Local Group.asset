@@ -29,6 +29,14 @@ MonoBehaviour:
     m_Address: TestTarget
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: bc9f1b7b62430da44bb2fb7f484cea95
+    m_Address: Assets/_Prefabs/GridTarget.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c7a420d479c9b9b42beda460bee10a11
+    m_Address: SquareTarget
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1b54e8a744568a04ba38ce17353d5379, type: 2}
   m_SchemaSet:

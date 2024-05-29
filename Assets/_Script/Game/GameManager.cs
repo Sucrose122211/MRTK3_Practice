@@ -3,18 +3,22 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GameType{
-    PICKMAN, BIMODAL, FITTS, FITTSTEST
+    PICKMAN, BIMODAL, FITTS, FITTSTEST, GRID
 }
 
 public class GameManager : BehaviourSingleton<GameManager>
 {
     [SerializeField] private GameType gameType;
-    [SerializeField] private ESelcectionStrategy selcectionStrategy;
+    [SerializeField] private ESelectionStrategy selectionStrategy;
+    ITestStratege test;
 
     // Start is called before the first frame update
     void Start()
     {
         if(GameInstance.I.UserType == EUSERTYPE.RECIEVER) return;
+
+        // selectionStrategy = GameInstance.I.SelectionStrategy;
+        // Debug.Log("Strategy: " + selectionStrategy);
 
         switch(gameType)
         {
@@ -23,17 +27,14 @@ public class GameManager : BehaviourSingleton<GameManager>
                 break;
             case GameType.BIMODAL:
                 break;
-            case GameType.FITTS:
-                if(GameInstance.I.UserType == EUSERTYPE.RECIEVER) break;
-                var fmanager = new FittsManager(EFITTSTYPE.DATA);
-                new SelectManager(selcectionStrategy);
-                fmanager.StartTest();
+            case GameType.FITTS: 
+            case GameType.FITTSTEST:
+                test = new FittsTestStrategy(selectionStrategy, gameType);
+                test.StartTest();
                 break;
-            case GameType.FITTSTEST:                
-                if(GameInstance.I.UserType == EUSERTYPE.RECIEVER) break;
-                var fManager = new FittsManager(EFITTSTYPE.TEST);
-                new SelectManager(selcectionStrategy);
-                fManager.StartTest();
+            case GameType.GRID:
+                test = new GridTestStrategy();
+                test.StartTest();
                 break;
             default:
             break;

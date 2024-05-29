@@ -36,11 +36,16 @@ namespace Utils
             Vector3 targetPos = target.transform.position - origin;
             Vector3 normY = ax.normalized;
             Vector3 normX = Vector3.Cross(normY, targetPos).normalized;
-            // Debug.Log(normX + " " + normY);
-            Vector3 worldPosX = Vector3.ProjectOnPlane(worldPos, normX);
-            Vector3 worldPosY = Vector3.ProjectOnPlane(worldPos, normY);
-            float x = Vector3.SignedAngle(worldPosX, targetPos, normX);
-            float y = Vector3.SignedAngle(worldPosY, targetPos, normY);
+            
+            Vector3 worldProjX = Vector3.ProjectOnPlane(worldPos, normX);
+            Vector3 worldProjY = Vector3.ProjectOnPlane(worldPos, normY);
+
+            Vector3 targetProjX = Vector3.ProjectOnPlane(targetPos, normX);
+            Vector3 targetProjY = Vector3.ProjectOnPlane(targetPos, normY);
+
+
+            float x = Vector3.SignedAngle(worldProjX, targetProjX, normX);
+            float y = Vector3.SignedAngle(worldProjY, targetProjY, normY);
             return new Vector2(x, y);
         }
     }

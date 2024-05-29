@@ -22,6 +22,9 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
 
         [SerializeField] GameObject m_instancePrefab;
         [SerializeField] ProjectSceneManager m_sceneManager;
+        [SerializeField] ESelectionStrategy selectionStrategy = ESelectionStrategy.VBC;
+
+        public ESelectionStrategy SelectionStrategy => selectionStrategy;
 
         private NetworkObject spawnObject;
         // Start is called before the first frame update
@@ -54,6 +57,7 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             {
                 case SceneEventType.LoadComplete:
                     {
+                        GameInstance.I.SetStrategy(selectionStrategy);
                         GameInstance.I.OnSceneChange();
                         GameInstance.I.SendEventRPC();
                         break;
@@ -98,6 +102,14 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
             var go = Instantiate(m_instancePrefab);
             spawnObject = go.GetComponent<NetworkObject>();
             spawnObject.Spawn(false);
+        }
+
+        public void ToggleStrategy()
+        {
+            if(selectionStrategy == ESelectionStrategy.VBC)
+                selectionStrategy = ESelectionStrategy.PREDICTION;
+            else
+                selectionStrategy = ESelectionStrategy.VBC;
         }
 
         public void OpenScene(string name)
