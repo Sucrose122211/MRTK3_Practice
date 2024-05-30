@@ -10,7 +10,10 @@ public class GameManager : BehaviourSingleton<GameManager>
 {
     [SerializeField] private GameType gameType;
     [SerializeField] private ESelectionStrategy selectionStrategy;
-    ITestStratege test;
+
+    public ESelectionStrategy SelectionStrategy => selectionStrategy;
+
+    ITestStrategy test;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +36,7 @@ public class GameManager : BehaviourSingleton<GameManager>
                 test.StartTest();
                 break;
             case GameType.GRID:
-                test = new GridTestStrategy();
+                test = I.AddComponent<GridTestStrategy>();
                 test.StartTest();
                 break;
             default:

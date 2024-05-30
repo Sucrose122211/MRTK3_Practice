@@ -23,8 +23,6 @@ public class PredictionSelection : ISelectionStrategy
 
         var objects = GameObject.FindObjectsOfType<SelectableObject>();
 
-        Debug.Log(objects.Length);
-
         float[] probs = new float[objects.Length];
         for(int i = 0; i < objects.Length; i++)
         {
@@ -36,7 +34,7 @@ public class PredictionSelection : ISelectionStrategy
             probs[i] = probs[i] / s * 100;
         }
 
-        Debug.Log(string.Join(", ", probs));
+        Debug.Log("Probabilities: " + string.Join(", ", probs));
         var tmp = probs.ToList();
         target = objects[tmp.IndexOf(probs.Max())].gameObject;
     }

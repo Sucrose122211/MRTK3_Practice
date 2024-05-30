@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FittsTestStrategy : ITestStratege
+public class FittsTestStrategy : ITestStrategy
 {
     ESelectionStrategy _selectionStrategy;
     EFITTSTYPE _fittsType;

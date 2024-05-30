@@ -14,8 +14,6 @@ public class VBCSelection : ISelectionStrategy
         if (!Physics.Raycast(GI.GazeManager.GazeOrigin, GI.GazeManager.GazeVector, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Selectable")))
             return;
 
-        Debug.Log(hit.collider.gameObject);
-
         if(hit.normal.sqrMagnitude < 0) return;
 
         target = hit.collider.gameObject;

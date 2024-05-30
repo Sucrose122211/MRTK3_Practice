@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using data;
+using UnityEngine;
 
 public partial class DataManager : ManagerBase
 {
@@ -65,6 +66,7 @@ public partial class DataManager : ManagerBase
 
     public void ClearData()
     {
+        Debug.Log("Data Cleared");
         DataDict.Clear();
     }
 }

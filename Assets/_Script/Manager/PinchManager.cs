@@ -33,7 +33,6 @@ public class PinchManager : ManagerBase
     public override void OnAwake()
     {
         base.OnAwake();
-        Debug.Log("PinchManager");
         Debug.Log(NetworkManager.Singleton.IsServer);
         if(!NetworkManager.Singleton.IsServer)
             GameInstance.I.CoroutineHelp(EnableWhenSubsystemAvailable());
@@ -65,7 +64,6 @@ public class PinchManager : ManagerBase
         if(pinchAmount > pinchThreshold && !togleRightPinch)
         {
             togleRightPinch = true;
-            Debug.Log("Right Pinch");
             m_OnPinchEvent?.Invoke();
             var interactables = GameInstance.I.GetAllInteractable<IPinchInteractable>();
 
@@ -87,7 +85,6 @@ public class PinchManager : ManagerBase
         if(pinchAmount > pinchThreshold && !togleLeftPinch)
         {
             togleLeftPinch = true;
-            Debug.Log("Left Pinch");
             m_OnPinchEvent?.Invoke();
             var interactables = GameInstance.I.GetAllInteractable<IPinchInteractable>();
 

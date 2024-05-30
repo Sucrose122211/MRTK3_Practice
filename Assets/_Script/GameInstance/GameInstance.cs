@@ -104,7 +104,6 @@ namespace Microsoft.MixedReality.Toolkit.MultiUse
 #region Strategy
         public void SetStrategy(ESelectionStrategy strategy)
         {
-            Debug.Log("SetStrategy: " + strategy);
             m_selectionStrategy = strategy;
         }
 #endregion

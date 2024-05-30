@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GridSelectableObject : SelectableObject
 {
+    [SerializeField] private int num;
+    public int Num => num;
     // Start is called before the first frame update
     void Start()
     {

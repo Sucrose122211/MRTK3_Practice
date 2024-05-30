@@ -3,7 +3,7 @@ public enum ETestStrategy{
 
 }
 
-public interface ITestStratege
+public interface ITestStrategy
 {
     void StartTest();
 }
